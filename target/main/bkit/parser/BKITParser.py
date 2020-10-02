@@ -11,10 +11,10 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\13")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3B")
         buf.write("\13\4\2\t\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\2\2\3\2\2\2\2")
-        buf.write("\t\2\4\3\2\2\2\4\5\7\6\2\2\5\6\7\5\2\2\6\7\7\3\2\2\7\b")
-        buf.write("\7\4\2\2\b\t\7\2\2\3\t\3\3\2\2\2\2")
+        buf.write("\t\2\4\3\2\2\2\4\5\7\r\2\2\5\6\7:\2\2\6\7\7\3\2\2\7\b")
+        buf.write("\7;\2\2\b\t\7\2\2\3\t\3\3\2\2\2\2")
         return buf.getvalue()
 
 
@@ -28,10 +28,32 @@ class BKITParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "<INVALID>", "';'", "':'", "'Var'" ]
+    literalNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "'Body'", "'Else'", 
+                     "'EndFor'", "'If'", "'Var'", "'EndDo'", "'Break'", 
+                     "'ElseIf'", "'EndWhile'", "'Parameter'", "'While'", 
+                     "'Continue'", "'EndBody'", "'For'", "'Return'", "'Operators'", 
+                     "'Do'", "'EndIf'", "'Function'", "'Then'", "'-'", "'-.'", 
+                     "'+'", "'+.'", "'*'", "'*.'", "'\\'", "'\\.'", "'%'", 
+                     "'!'", "'&&'", "'||'", "'=='", "'!='", "'<'", "'>'", 
+                     "'<='", "'>='", "'=/='", "'<.'", "'>.'", "'<=.'", "'>=.'", 
+                     "'('", "')'", "'['", "']'", "'{'", "'}'", "':'", "';'", 
+                     "','", "'.'" ]
 
-    symbolicNames = [ "<INVALID>", "ID", "SEMI", "COLON", "VAR", "WS", "ERROR_CHAR", 
-                      "UNCLOSE_STRING", "ILLEGAL_ESCAPE", "UNTERMINATED_COMMENT" ]
+    symbolicNames = [ "<INVALID>", "ID", "INTLIT", "FLOATLIT", "BOOLEANLIT", 
+                      "STRINGLIT", "ARRAYLIT", "BODY", "ELSE", "END_FOR", 
+                      "IF", "VAR", "END_DO", "BREAK", "ELSE_IF", "END_WHILE", 
+                      "PARAMETER", "WHILE", "CONTINUE", "END_BODY", "FOR", 
+                      "RETURN", "OPERATORS", "DO", "END_IF", "FUNCTION", 
+                      "THEN", "INT_SUB_OP", "FLOAT_SUB_OP", "INT_ADD_OP", 
+                      "FLOAT_ADD_OP", "INT_MUL_OP", "FLOAT_MUL_OP", "INT_DIV_OP", 
+                      "FLOAT_DIV_OP", "INT_REMAINDER_OP", "NEG_OP", "CONJ_OP", 
+                      "DISJ_OP", "EQ_OP", "INT_NEQ_OP", "INT_LT_OP", "INT_GT_OP", 
+                      "INT_LTE_OP", "INT_GTE_OP", "FLOAT_NEQ_OP", "FLOAT_LT_OP", 
+                      "FLOAT_GT_OP", "FLOAT_LTE_OP", "FLOAT_GTE_OP", "LP", 
+                      "RP", "LSB", "RSB", "LCB", "RCB", "COLON", "SEMI", 
+                      "COMMA", "DOT", "WS", "ERROR_CHAR", "UNCLOSE_STRING", 
+                      "ILLEGAL_ESCAPE", "UNTERMINATED_COMMENT" ]
 
     RULE_program = 0
 
@@ -39,14 +61,69 @@ class BKITParser ( Parser ):
 
     EOF = Token.EOF
     ID=1
-    SEMI=2
-    COLON=3
-    VAR=4
-    WS=5
-    ERROR_CHAR=6
-    UNCLOSE_STRING=7
-    ILLEGAL_ESCAPE=8
-    UNTERMINATED_COMMENT=9
+    INTLIT=2
+    FLOATLIT=3
+    BOOLEANLIT=4
+    STRINGLIT=5
+    ARRAYLIT=6
+    BODY=7
+    ELSE=8
+    END_FOR=9
+    IF=10
+    VAR=11
+    END_DO=12
+    BREAK=13
+    ELSE_IF=14
+    END_WHILE=15
+    PARAMETER=16
+    WHILE=17
+    CONTINUE=18
+    END_BODY=19
+    FOR=20
+    RETURN=21
+    OPERATORS=22
+    DO=23
+    END_IF=24
+    FUNCTION=25
+    THEN=26
+    INT_SUB_OP=27
+    FLOAT_SUB_OP=28
+    INT_ADD_OP=29
+    FLOAT_ADD_OP=30
+    INT_MUL_OP=31
+    FLOAT_MUL_OP=32
+    INT_DIV_OP=33
+    FLOAT_DIV_OP=34
+    INT_REMAINDER_OP=35
+    NEG_OP=36
+    CONJ_OP=37
+    DISJ_OP=38
+    EQ_OP=39
+    INT_NEQ_OP=40
+    INT_LT_OP=41
+    INT_GT_OP=42
+    INT_LTE_OP=43
+    INT_GTE_OP=44
+    FLOAT_NEQ_OP=45
+    FLOAT_LT_OP=46
+    FLOAT_GT_OP=47
+    FLOAT_LTE_OP=48
+    FLOAT_GTE_OP=49
+    LP=50
+    RP=51
+    LSB=52
+    RSB=53
+    LCB=54
+    RCB=55
+    COLON=56
+    SEMI=57
+    COMMA=58
+    DOT=59
+    WS=60
+    ERROR_CHAR=61
+    UNCLOSE_STRING=62
+    ILLEGAL_ESCAPE=63
+    UNTERMINATED_COMMENT=64
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
