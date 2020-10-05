@@ -12,7 +12,7 @@ else:
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3D")
-        buf.write("\u00dd\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\u0101\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\3\2\7\2,\n\2\f\2\16\2/\13\2\3\2\6")
@@ -31,23 +31,28 @@ def serializedATN():
         buf.write("\3\20\3\20\3\21\3\21\3\21\3\22\3\22\3\22\3\23\3\23\3\23")
         buf.write("\3\23\3\23\7\23\u00cc\n\23\f\23\16\23\u00cf\13\23\5\23")
         buf.write("\u00d1\n\23\3\23\3\23\3\24\3\24\5\24\u00d7\n\24\3\24\3")
-        buf.write("\24\3\25\3\25\3\25\2\2\26\2\4\6\b\n\f\16\20\22\24\26\30")
-        buf.write("\32\34\36 \"$&(\2\3\3\2\4\b\2\u00df\2-\3\2\2\2\4\67\3")
-        buf.write("\2\2\2\6C\3\2\2\2\bH\3\2\2\2\nQ\3\2\2\2\fY\3\2\2\2\16")
-        buf.write("c\3\2\2\2\20l\3\2\2\2\22u\3\2\2\2\24\u0086\3\2\2\2\26")
-        buf.write("\u008b\3\2\2\2\30\u00a0\3\2\2\2\32\u00af\3\2\2\2\34\u00b6")
-        buf.write("\3\2\2\2\36\u00bd\3\2\2\2 \u00c0\3\2\2\2\"\u00c3\3\2\2")
-        buf.write("\2$\u00c6\3\2\2\2&\u00d4\3\2\2\2(\u00da\3\2\2\2*,\5\4")
-        buf.write("\3\2+*\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\61\3\2\2")
-        buf.write("\2/-\3\2\2\2\60\62\5\n\6\2\61\60\3\2\2\2\62\63\3\2\2\2")
-        buf.write("\63\61\3\2\2\2\63\64\3\2\2\2\64\65\3\2\2\2\65\66\7\2\2")
-        buf.write("\3\66\3\3\2\2\2\678\7\r\2\289\7;\2\29>\5\6\4\2:;\7=\2")
-        buf.write("\2;=\5\6\4\2<:\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?")
-        buf.write("A\3\2\2\2@>\3\2\2\2AB\7<\2\2B\5\3\2\2\2CF\5\b\5\2DE\7")
-        buf.write("\64\2\2EG\t\2\2\2FD\3\2\2\2FG\3\2\2\2G\7\3\2\2\2HN\7\3")
-        buf.write("\2\2IJ\7\67\2\2JK\7\4\2\2KM\78\2\2LI\3\2\2\2MP\3\2\2\2")
-        buf.write("NL\3\2\2\2NO\3\2\2\2O\t\3\2\2\2PN\3\2\2\2QR\7\33\2\2R")
-        buf.write("S\7;\2\2SU\7\3\2\2TV\5\f\7\2UT\3\2\2\2UV\3\2\2\2VW\3\2")
+        buf.write("\24\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25\3\25")
+        buf.write("\3\25\6\25\u00e6\n\25\r\25\16\25\u00e7\3\25\3\25\3\25")
+        buf.write("\3\25\3\25\5\25\u00ef\n\25\3\25\3\25\3\25\3\25\3\25\3")
+        buf.write("\25\3\25\3\25\3\25\3\25\3\25\7\25\u00fc\n\25\f\25\16\25")
+        buf.write("\u00ff\13\25\3\25\2\3(\26\2\4\6\b\n\f\16\20\22\24\26\30")
+        buf.write("\32\34\36 \"$&(\2\t\3\2\4\b\3\2\35\36\3\2\3\6\3\2!%\3")
+        buf.write("\2\35 \3\2\'(\3\2)\63\2\u010d\2-\3\2\2\2\4\67\3\2\2\2")
+        buf.write("\6C\3\2\2\2\bH\3\2\2\2\nQ\3\2\2\2\fY\3\2\2\2\16c\3\2\2")
+        buf.write("\2\20l\3\2\2\2\22u\3\2\2\2\24\u0086\3\2\2\2\26\u008b\3")
+        buf.write("\2\2\2\30\u00a0\3\2\2\2\32\u00af\3\2\2\2\34\u00b6\3\2")
+        buf.write("\2\2\36\u00bd\3\2\2\2 \u00c0\3\2\2\2\"\u00c3\3\2\2\2$")
+        buf.write("\u00c6\3\2\2\2&\u00d4\3\2\2\2(\u00ee\3\2\2\2*,\5\4\3\2")
+        buf.write("+*\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\61\3\2\2\2/")
+        buf.write("-\3\2\2\2\60\62\5\n\6\2\61\60\3\2\2\2\62\63\3\2\2\2\63")
+        buf.write("\61\3\2\2\2\63\64\3\2\2\2\64\65\3\2\2\2\65\66\7\2\2\3")
+        buf.write("\66\3\3\2\2\2\678\7\r\2\289\7;\2\29>\5\6\4\2:;\7=\2\2")
+        buf.write(";=\5\6\4\2<:\3\2\2\2=@\3\2\2\2><\3\2\2\2>?\3\2\2\2?A\3")
+        buf.write("\2\2\2@>\3\2\2\2AB\7<\2\2B\5\3\2\2\2CF\5\b\5\2DE\7\64")
+        buf.write("\2\2EG\t\2\2\2FD\3\2\2\2FG\3\2\2\2G\7\3\2\2\2HN\7\3\2")
+        buf.write("\2IJ\7\67\2\2JK\7\4\2\2KM\78\2\2LI\3\2\2\2MP\3\2\2\2N")
+        buf.write("L\3\2\2\2NO\3\2\2\2O\t\3\2\2\2PN\3\2\2\2QR\7\33\2\2RS")
+        buf.write("\7;\2\2SU\7\3\2\2TV\5\f\7\2UT\3\2\2\2UV\3\2\2\2VW\3\2")
         buf.write("\2\2WX\5\20\t\2X\13\3\2\2\2YZ\7\22\2\2Z[\7;\2\2[`\5\16")
         buf.write("\b\2\\]\7=\2\2]_\5\16\b\2^\\\3\2\2\2_b\3\2\2\2`^\3\2\2")
         buf.write("\2`a\3\2\2\2a\r\3\2\2\2b`\3\2\2\2ci\7\3\2\2de\7\67\2\2")
@@ -94,9 +99,26 @@ def serializedATN():
         buf.write("\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2\u00d3\7\66\2\2\u00d3")
         buf.write("%\3\2\2\2\u00d4\u00d6\7\27\2\2\u00d5\u00d7\5(\25\2\u00d6")
         buf.write("\u00d5\3\2\2\2\u00d6\u00d7\3\2\2\2\u00d7\u00d8\3\2\2\2")
-        buf.write("\u00d8\u00d9\7<\2\2\u00d9\'\3\2\2\2\u00da\u00db\3\2\2")
-        buf.write("\2\u00db)\3\2\2\2\22-\63>FNU`iu\u0081\u0083\u0096\u009b")
-        buf.write("\u00cd\u00d0\u00d6")
+        buf.write("\u00d8\u00d9\7<\2\2\u00d9\'\3\2\2\2\u00da\u00db\b\25\1")
+        buf.write("\2\u00db\u00dc\7\65\2\2\u00dc\u00dd\5(\25\2\u00dd\u00de")
+        buf.write("\7\66\2\2\u00de\u00ef\3\2\2\2\u00df\u00ef\5$\23\2\u00e0")
+        buf.write("\u00e5\7\3\2\2\u00e1\u00e2\7\67\2\2\u00e2\u00e3\5(\25")
+        buf.write("\2\u00e3\u00e4\78\2\2\u00e4\u00e6\3\2\2\2\u00e5\u00e1")
+        buf.write("\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00e5\3\2\2\2\u00e7")
+        buf.write("\u00e8\3\2\2\2\u00e8\u00ef\3\2\2\2\u00e9\u00ea\t\3\2\2")
+        buf.write("\u00ea\u00ef\5(\25\t\u00eb\u00ec\7&\2\2\u00ec\u00ef\5")
+        buf.write("(\25\b\u00ed\u00ef\t\4\2\2\u00ee\u00da\3\2\2\2\u00ee\u00df")
+        buf.write("\3\2\2\2\u00ee\u00e0\3\2\2\2\u00ee\u00e9\3\2\2\2\u00ee")
+        buf.write("\u00eb\3\2\2\2\u00ee\u00ed\3\2\2\2\u00ef\u00fd\3\2\2\2")
+        buf.write("\u00f0\u00f1\f\7\2\2\u00f1\u00f2\t\5\2\2\u00f2\u00fc\5")
+        buf.write("(\25\b\u00f3\u00f4\f\6\2\2\u00f4\u00f5\t\6\2\2\u00f5\u00fc")
+        buf.write("\5(\25\7\u00f6\u00f7\f\5\2\2\u00f7\u00f8\t\7\2\2\u00f8")
+        buf.write("\u00fc\5(\25\6\u00f9\u00fa\f\4\2\2\u00fa\u00fc\t\b\2\2")
+        buf.write("\u00fb\u00f0\3\2\2\2\u00fb\u00f3\3\2\2\2\u00fb\u00f6\3")
+        buf.write("\2\2\2\u00fb\u00f9\3\2\2\2\u00fc\u00ff\3\2\2\2\u00fd\u00fb")
+        buf.write("\3\2\2\2\u00fd\u00fe\3\2\2\2\u00fe)\3\2\2\2\u00ff\u00fd")
+        buf.write("\3\2\2\2\26-\63>FNU`iu\u0081\u0083\u0096\u009b\u00cd\u00d0")
+        buf.write("\u00d6\u00e7\u00ee\u00fb\u00fd")
         return buf.getvalue()
 
 
@@ -959,7 +981,7 @@ class BKITParser ( Parser ):
             self.state = 133
             self.match(BKITParser.ASSIGN_OP)
             self.state = 134
-            self.expression()
+            self.expression(0)
             self.state = 135
             self.match(BKITParser.SEMI)
         except RecognitionException as re:
@@ -1031,7 +1053,7 @@ class BKITParser ( Parser ):
             self.state = 137
             self.match(BKITParser.IF)
             self.state = 138
-            self.expression()
+            self.expression(0)
             self.state = 139
             self.match(BKITParser.THEN)
             self.state = 140
@@ -1043,7 +1065,7 @@ class BKITParser ( Parser ):
                 self.state = 141
                 self.match(BKITParser.ELSE_IF)
                 self.state = 142
-                self.expression()
+                self.expression(0)
                 self.state = 143
                 self.match(BKITParser.THEN)
                 self.state = 144
@@ -1143,15 +1165,15 @@ class BKITParser ( Parser ):
             self.state = 161
             self.match(BKITParser.ASSIGN_OP)
             self.state = 162
-            self.expression()
+            self.expression(0)
             self.state = 163
             self.match(BKITParser.COMMA)
             self.state = 164
-            self.expression()
+            self.expression(0)
             self.state = 165
             self.match(BKITParser.COMMA)
             self.state = 166
-            self.expression()
+            self.expression(0)
             self.state = 167
             self.match(BKITParser.RP)
             self.state = 168
@@ -1212,7 +1234,7 @@ class BKITParser ( Parser ):
             self.state = 173
             self.match(BKITParser.WHILE)
             self.state = 174
-            self.expression()
+            self.expression(0)
             self.state = 175
             self.match(BKITParser.DO)
             self.state = 176
@@ -1275,7 +1297,7 @@ class BKITParser ( Parser ):
             self.state = 182
             self.match(BKITParser.WHILE)
             self.state = 183
-            self.expression()
+            self.expression(0)
             self.state = 184
             self.match(BKITParser.END_DO)
             self.state = 185
@@ -1448,10 +1470,10 @@ class BKITParser ( Parser ):
             self.match(BKITParser.LP)
             self.state = 206
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
-            if la_ == 1:
+            _la = self._input.LA(1)
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT) | (1 << BKITParser.INT_SUB_OP) | (1 << BKITParser.FLOAT_SUB_OP) | (1 << BKITParser.NEG_OP) | (1 << BKITParser.LP))) != 0):
                 self.state = 198
-                self.expression()
+                self.expression(0)
                 self.state = 203
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -1459,7 +1481,7 @@ class BKITParser ( Parser ):
                     self.state = 199
                     self.match(BKITParser.COMMA)
                     self.state = 200
-                    self.expression()
+                    self.expression(0)
                     self.state = 205
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
@@ -1503,16 +1525,17 @@ class BKITParser ( Parser ):
 
         localctx = BKITParser.Return_stmtContext(self, self._ctx, self.state)
         self.enterRule(localctx, 36, self.RULE_return_stmt)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 210
             self.match(BKITParser.RETURN)
             self.state = 212
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,15,self._ctx)
-            if la_ == 1:
+            _la = self._input.LA(1)
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT) | (1 << BKITParser.INT_SUB_OP) | (1 << BKITParser.FLOAT_SUB_OP) | (1 << BKITParser.NEG_OP) | (1 << BKITParser.LP))) != 0):
                 self.state = 211
-                self.expression()
+                self.expression(0)
 
 
             self.state = 214
@@ -1532,28 +1555,324 @@ class BKITParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def LP(self):
+            return self.getToken(BKITParser.LP, 0)
+
+        def expression(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(BKITParser.ExpressionContext)
+            else:
+                return self.getTypedRuleContext(BKITParser.ExpressionContext,i)
+
+
+        def RP(self):
+            return self.getToken(BKITParser.RP, 0)
+
+        def func_call(self):
+            return self.getTypedRuleContext(BKITParser.Func_callContext,0)
+
+
+        def ID(self):
+            return self.getToken(BKITParser.ID, 0)
+
+        def LSB(self, i:int=None):
+            if i is None:
+                return self.getTokens(BKITParser.LSB)
+            else:
+                return self.getToken(BKITParser.LSB, i)
+
+        def RSB(self, i:int=None):
+            if i is None:
+                return self.getTokens(BKITParser.RSB)
+            else:
+                return self.getToken(BKITParser.RSB, i)
+
+        def INT_SUB_OP(self):
+            return self.getToken(BKITParser.INT_SUB_OP, 0)
+
+        def FLOAT_SUB_OP(self):
+            return self.getToken(BKITParser.FLOAT_SUB_OP, 0)
+
+        def NEG_OP(self):
+            return self.getToken(BKITParser.NEG_OP, 0)
+
+        def INTLIT(self):
+            return self.getToken(BKITParser.INTLIT, 0)
+
+        def FLOATLIT(self):
+            return self.getToken(BKITParser.FLOATLIT, 0)
+
+        def BOOLEANLIT(self):
+            return self.getToken(BKITParser.BOOLEANLIT, 0)
+
+        def INT_MUL_OP(self):
+            return self.getToken(BKITParser.INT_MUL_OP, 0)
+
+        def FLOAT_MUL_OP(self):
+            return self.getToken(BKITParser.FLOAT_MUL_OP, 0)
+
+        def INT_DIV_OP(self):
+            return self.getToken(BKITParser.INT_DIV_OP, 0)
+
+        def FLOAT_DIV_OP(self):
+            return self.getToken(BKITParser.FLOAT_DIV_OP, 0)
+
+        def INT_REMAINDER_OP(self):
+            return self.getToken(BKITParser.INT_REMAINDER_OP, 0)
+
+        def INT_ADD_OP(self):
+            return self.getToken(BKITParser.INT_ADD_OP, 0)
+
+        def FLOAT_ADD_OP(self):
+            return self.getToken(BKITParser.FLOAT_ADD_OP, 0)
+
+        def CONJ_OP(self):
+            return self.getToken(BKITParser.CONJ_OP, 0)
+
+        def DISJ_OP(self):
+            return self.getToken(BKITParser.DISJ_OP, 0)
+
+        def EQ_OP(self):
+            return self.getToken(BKITParser.EQ_OP, 0)
+
+        def INT_NEQ_OP(self):
+            return self.getToken(BKITParser.INT_NEQ_OP, 0)
+
+        def FLOAT_NEQ_OP(self):
+            return self.getToken(BKITParser.FLOAT_NEQ_OP, 0)
+
+        def INT_LT_OP(self):
+            return self.getToken(BKITParser.INT_LT_OP, 0)
+
+        def FLOAT_LT_OP(self):
+            return self.getToken(BKITParser.FLOAT_LT_OP, 0)
+
+        def INT_GT_OP(self):
+            return self.getToken(BKITParser.INT_GT_OP, 0)
+
+        def FLOAT_GT_OP(self):
+            return self.getToken(BKITParser.FLOAT_GT_OP, 0)
+
+        def INT_LTE_OP(self):
+            return self.getToken(BKITParser.INT_LTE_OP, 0)
+
+        def FLOAT_LTE_OP(self):
+            return self.getToken(BKITParser.FLOAT_LTE_OP, 0)
+
+        def INT_GTE_OP(self):
+            return self.getToken(BKITParser.INT_GTE_OP, 0)
+
+        def FLOAT_GTE_OP(self):
+            return self.getToken(BKITParser.FLOAT_GTE_OP, 0)
 
         def getRuleIndex(self):
             return BKITParser.RULE_expression
 
 
 
-
-    def expression(self):
-
-        localctx = BKITParser.ExpressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_expression)
+    def expression(self, _p:int=0):
+        _parentctx = self._ctx
+        _parentState = self.state
+        localctx = BKITParser.ExpressionContext(self, self._ctx, _parentState)
+        _prevctx = localctx
+        _startState = 38
+        self.enterRecursionRule(localctx, 38, self.RULE_expression, _p)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
+            self.state = 236
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
+            if la_ == 1:
+                self.state = 217
+                self.match(BKITParser.LP)
+                self.state = 218
+                self.expression(0)
+                self.state = 219
+                self.match(BKITParser.RP)
+                pass
+
+            elif la_ == 2:
+                self.state = 221
+                self.func_call()
+                pass
+
+            elif la_ == 3:
+                self.state = 222
+                self.match(BKITParser.ID)
+                self.state = 227 
+                self._errHandler.sync(self)
+                _alt = 1
+                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                    if _alt == 1:
+                        self.state = 223
+                        self.match(BKITParser.LSB)
+                        self.state = 224
+                        self.expression(0)
+                        self.state = 225
+                        self.match(BKITParser.RSB)
+
+                    else:
+                        raise NoViableAltException(self)
+                    self.state = 229 
+                    self._errHandler.sync(self)
+                    _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
+
+                pass
+
+            elif la_ == 4:
+                self.state = 231
+                _la = self._input.LA(1)
+                if not(_la==BKITParser.INT_SUB_OP or _la==BKITParser.FLOAT_SUB_OP):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
+                self.state = 232
+                self.expression(7)
+                pass
+
+            elif la_ == 5:
+                self.state = 233
+                self.match(BKITParser.NEG_OP)
+                self.state = 234
+                self.expression(6)
+                pass
+
+            elif la_ == 6:
+                self.state = 235
+                _la = self._input.LA(1)
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT))) != 0)):
+                    self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
+                pass
+
+
+            self._ctx.stop = self._input.LT(-1)
+            self.state = 251
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    if self._parseListeners is not None:
+                        self.triggerExitRuleEvent()
+                    _prevctx = localctx
+                    self.state = 249
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
+                    if la_ == 1:
+                        localctx = BKITParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 238
+                        if not self.precpred(self._ctx, 5):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
+                        self.state = 239
+                        _la = self._input.LA(1)
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.INT_MUL_OP) | (1 << BKITParser.FLOAT_MUL_OP) | (1 << BKITParser.INT_DIV_OP) | (1 << BKITParser.FLOAT_DIV_OP) | (1 << BKITParser.INT_REMAINDER_OP))) != 0)):
+                            self._errHandler.recoverInline(self)
+                        else:
+                            self._errHandler.reportMatch(self)
+                            self.consume()
+                        self.state = 240
+                        self.expression(6)
+                        pass
+
+                    elif la_ == 2:
+                        localctx = BKITParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 241
+                        if not self.precpred(self._ctx, 4):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
+                        self.state = 242
+                        _la = self._input.LA(1)
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.INT_SUB_OP) | (1 << BKITParser.FLOAT_SUB_OP) | (1 << BKITParser.INT_ADD_OP) | (1 << BKITParser.FLOAT_ADD_OP))) != 0)):
+                            self._errHandler.recoverInline(self)
+                        else:
+                            self._errHandler.reportMatch(self)
+                            self.consume()
+                        self.state = 243
+                        self.expression(5)
+                        pass
+
+                    elif la_ == 3:
+                        localctx = BKITParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 244
+                        if not self.precpred(self._ctx, 3):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
+                        self.state = 245
+                        _la = self._input.LA(1)
+                        if not(_la==BKITParser.CONJ_OP or _la==BKITParser.DISJ_OP):
+                            self._errHandler.recoverInline(self)
+                        else:
+                            self._errHandler.reportMatch(self)
+                            self.consume()
+                        self.state = 246
+                        self.expression(4)
+                        pass
+
+                    elif la_ == 4:
+                        localctx = BKITParser.ExpressionContext(self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
+                        self.state = 247
+                        if not self.precpred(self._ctx, 2):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
+                        self.state = 248
+                        _la = self._input.LA(1)
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.EQ_OP) | (1 << BKITParser.INT_NEQ_OP) | (1 << BKITParser.INT_LT_OP) | (1 << BKITParser.INT_GT_OP) | (1 << BKITParser.INT_LTE_OP) | (1 << BKITParser.INT_GTE_OP) | (1 << BKITParser.FLOAT_NEQ_OP) | (1 << BKITParser.FLOAT_LT_OP) | (1 << BKITParser.FLOAT_GT_OP) | (1 << BKITParser.FLOAT_LTE_OP) | (1 << BKITParser.FLOAT_GTE_OP))) != 0)):
+                            self._errHandler.recoverInline(self)
+                        else:
+                            self._errHandler.reportMatch(self)
+                            self.consume()
+                        pass
+
+             
+                self.state = 253
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
             self._errHandler.recover(self, re)
         finally:
-            self.exitRule()
+            self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
+
+    def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
+        if self._predicates == None:
+            self._predicates = dict()
+        self._predicates[19] = self.expression_sempred
+        pred = self._predicates.get(ruleIndex, None)
+        if pred is None:
+            raise Exception("No predicate with index:" + str(ruleIndex))
+        else:
+            return pred(localctx, predIndex)
+
+    def expression_sempred(self, localctx:ExpressionContext, predIndex:int):
+            if predIndex == 0:
+                return self.precpred(self._ctx, 5)
+         
+
+            if predIndex == 1:
+                return self.precpred(self._ctx, 4)
+         
+
+            if predIndex == 2:
+                return self.precpred(self._ctx, 3)
+         
+
+            if predIndex == 3:
+                return self.precpred(self._ctx, 2)
+         
 
 
 
