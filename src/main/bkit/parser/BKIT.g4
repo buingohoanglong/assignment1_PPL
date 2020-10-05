@@ -69,13 +69,13 @@ return_stmt : RETURN expression? SEMI;
 expression : 
     LP expression RP
     | func_call // function call : assoc none ?????
-    | ID (LSB expression RSB)+ // index
+    | ID (LSB expression RSB)+ // index : ARRAYLIT[expression] ??????
     | <assoc=right> (INT_SUB_OP | FLOAT_SUB_OP) expression  // sign
     | <assoc=right> NEG_OP expression   // logical
     | expression (INT_MUL_OP | FLOAT_MUL_OP | INT_DIV_OP | FLOAT_DIV_OP | INT_REMAINDER_OP) expression // multiplying
     | expression (INT_ADD_OP | FLOAT_ADD_OP | INT_SUB_OP | FLOAT_SUB_OP) expression // adding
     | expression (CONJ_OP | DISJ_OP) expression // logical
-    | expression (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) // relational : assoc none ????
+    | expression (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) expression // relational : assoc none ????
     | (ID | INTLIT | FLOATLIT | BOOLEANLIT) ; // operands
 
 // Identifiers
