@@ -38,7 +38,7 @@ def serializedATN():
         buf.write("\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26")
         buf.write("\3\26\3\26\7\26\u010a\n\26\f\26\16\26\u010d\13\26\3\26")
         buf.write("\2\3*\27\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(")
-        buf.write("*\2\t\3\2\4\b\3\2\35\36\3\2\3\7\3\2!%\3\2\35 \3\2\'(\3")
+        buf.write("*\2\t\3\2\4\b\3\2\35\36\3\2\3\b\3\2!%\3\2\35 \3\2\'(\3")
         buf.write("\2)\63\2\u011b\2/\3\2\2\2\4:\3\2\2\2\6F\3\2\2\2\bK\3\2")
         buf.write("\2\2\nT\3\2\2\2\f\\\3\2\2\2\16f\3\2\2\2\20o\3\2\2\2\22")
         buf.write("x\3\2\2\2\24\u0089\3\2\2\2\26\u008e\3\2\2\2\30\u0098\3")
@@ -1543,7 +1543,7 @@ class BKITParser ( Parser ):
             self.state = 219
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT) | (1 << BKITParser.STRINGLIT) | (1 << BKITParser.INT_SUB_OP) | (1 << BKITParser.FLOAT_SUB_OP) | (1 << BKITParser.NEG_OP) | (1 << BKITParser.LP))) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT) | (1 << BKITParser.STRINGLIT) | (1 << BKITParser.ARRAYLIT) | (1 << BKITParser.INT_SUB_OP) | (1 << BKITParser.FLOAT_SUB_OP) | (1 << BKITParser.NEG_OP) | (1 << BKITParser.LP))) != 0):
                 self.state = 211
                 self.expression(0)
                 self.state = 216
@@ -1605,7 +1605,7 @@ class BKITParser ( Parser ):
             self.state = 225
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT) | (1 << BKITParser.STRINGLIT) | (1 << BKITParser.INT_SUB_OP) | (1 << BKITParser.FLOAT_SUB_OP) | (1 << BKITParser.NEG_OP) | (1 << BKITParser.LP))) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT) | (1 << BKITParser.STRINGLIT) | (1 << BKITParser.ARRAYLIT) | (1 << BKITParser.INT_SUB_OP) | (1 << BKITParser.FLOAT_SUB_OP) | (1 << BKITParser.NEG_OP) | (1 << BKITParser.LP))) != 0):
                 self.state = 224
                 self.expression(0)
 
@@ -1679,6 +1679,9 @@ class BKITParser ( Parser ):
 
         def BOOLEANLIT(self):
             return self.getToken(BKITParser.BOOLEANLIT, 0)
+
+        def ARRAYLIT(self):
+            return self.getToken(BKITParser.ARRAYLIT, 0)
 
         def INT_MUL_OP(self):
             return self.getToken(BKITParser.INT_MUL_OP, 0)
@@ -1817,7 +1820,7 @@ class BKITParser ( Parser ):
             elif la_ == 6:
                 self.state = 248
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT) | (1 << BKITParser.STRINGLIT))) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << BKITParser.ID) | (1 << BKITParser.INTLIT) | (1 << BKITParser.FLOATLIT) | (1 << BKITParser.BOOLEANLIT) | (1 << BKITParser.STRINGLIT) | (1 << BKITParser.ARRAYLIT))) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)

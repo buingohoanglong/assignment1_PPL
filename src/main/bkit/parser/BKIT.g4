@@ -81,7 +81,7 @@ expression :
     | expression (INT_ADD_OP | FLOAT_ADD_OP | INT_SUB_OP | FLOAT_SUB_OP) expression // adding
     | expression (CONJ_OP | DISJ_OP) expression // logical
     | expression (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) expression // relational : assoc none ????
-    | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT) ; // operands
+    | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | ARRAYLIT) ; // operands
 
 // Identifiers
 ID: [a-z][a-zA-Z0-9_]* ;
