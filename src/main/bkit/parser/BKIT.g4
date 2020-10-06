@@ -1,3 +1,6 @@
+// MSSV : 1810283
+
+
 grammar BKIT;
 
 @lexer::header {
@@ -9,9 +12,9 @@ def emit(self):
     tk = self.type
     result = super().emit()
     if tk == self.UNCLOSE_STRING:       
-        raise UncloseString(result.text[1:])    # ???
+        raise UncloseString(result.text)   
     elif tk == self.ILLEGAL_ESCAPE:
-        raise IllegalEscape(result.text[1:])    # ???
+        raise IllegalEscape(result.text)    
     elif tk == self.ERROR_CHAR:
         raise ErrorToken(result.text)
     elif tk == self.UNTERMINATED_COMMENT:
@@ -96,10 +99,15 @@ FLOATLIT : INT_PART (DECIMAL_PART | EXPONENT_PART | DECIMAL_PART EXPONENT_PART);
 // Boolean
 BOOLEANLIT : 'True' | 'False';
 // String   ??????????
-STRINGLIT : '"' STR_CHAR* '"'; 
-fragment STR_CHAR : ~['"\n\\] | ('\\' ['bfrnt\\]) | '\'"' ;
+STRINGLIT : '"' STR_CHAR* '"'
+    {
+        value = str(self.text);
+        self.text = value[1:-1]
+    }; 
+fragment STR_CHAR : ~['"\n\\] | ('\\' ['bfrnt\\]) | ('\'' '"');
+
 // Array
-ARRAYLIT : LCB (LITERAL (COMMA LITERAL)*)? RCB;
+ARRAYLIT : LCB WS* (LITERAL WS* (COMMA WS* LITERAL WS*)*)? RCB;
 fragment LITERAL : INTLIT | FLOATLIT | BOOLEANLIT | ARRAYLIT;
 
 // Keywords
@@ -172,7 +180,15 @@ WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 
 // Errors
 ERROR_CHAR: .;
-UNCLOSE_STRING: '"' STR_CHAR*;
-ILLEGAL_ESCAPE: '"' STR_CHAR* '\\' ~['bfrnt\\];
+UNCLOSE_STRING: '"' STR_CHAR*
+    {
+        value = str(self.text)
+        self.text = value[1:]
+    };
+ILLEGAL_ESCAPE: '"' STR_CHAR* '\\' ~['bfrnt\\]
+    {
+        value = str(self.text)
+        self.text = value[1:]
+    };
 UNTERMINATED_COMMENT: '**' .*?; // ?????
 
