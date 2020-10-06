@@ -28,7 +28,7 @@ options{
 }
 
 // program
-program  : var_dcl* func_dcl+ EOF;
+program  : var_dcl* func_dcl* EOF;
 
 // variable declaration
 var_dcl : VAR COLON var_init (COMMA var_init)* SEMI;
@@ -48,7 +48,9 @@ body : BODY COLON statement_list END_BODY DOT;
 statement_list : var_dcl* (assign_stmt | if_stmt | for_stmt | while_stmt | do_while_stmt | call_stmt | return_stmt | break_stmt | continue_stmt)*;
 
 // statements
-assign_stmt : var ASSIGN_OP expression SEMI;
+assign_stmt : variable ASSIGN_OP expression SEMI;
+
+variable : ID (LSB expression RSB)*;
 
 if_stmt : IF expression THEN statement_list (ELSE_IF expression THEN statement_list)* (ELSE statement_list)? END_IF DOT;
 
@@ -79,7 +81,7 @@ expression :
     | expression (INT_ADD_OP | FLOAT_ADD_OP | INT_SUB_OP | FLOAT_SUB_OP) expression // adding
     | expression (CONJ_OP | DISJ_OP) expression // logical
     | expression (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) expression // relational : assoc none ????
-    | (ID | INTLIT | FLOATLIT | BOOLEANLIT) ; // operands
+    | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT) ; // operands
 
 // Identifiers
 ID: [a-z][a-zA-Z0-9_]* ;
@@ -108,7 +110,7 @@ fragment STR_CHAR : ~['"\n\\] | ('\\' ['bfrnt\\]) | ('\'' '"');
 
 // Array
 ARRAYLIT : LCB WS* (LITERAL WS* (COMMA WS* LITERAL WS*)*)? RCB;
-fragment LITERAL : INTLIT | FLOATLIT | BOOLEANLIT | ARRAYLIT;
+fragment LITERAL : INTLIT | FLOATLIT | BOOLEANLIT | STRINGLIT | ARRAYLIT;
 
 // Keywords
 BODY : 'Body';
