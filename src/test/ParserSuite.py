@@ -912,10 +912,99 @@ Function: main
         self.assertTrue(TestParser.checkParser(input,expect,289))    
 
     # Test expression
+    def test_expression_1(self):
+        input = """
+Function: main
+    Body:
+        x = a + b - c * d \ f % 5 ;
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,290))    
+
+    def test_expression_2(self):
+        input = """
+Function: main
+    Body:
+        sum(27 % 2 + (x - 5) * 9 \ 3, -y*5 - 3 + 9);
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,291))    
+
+    def test_expression_3(self):
+        input = """
+Function: main
+    Body:
+        sum(27. \. 3e-3 +. x*.2. -. 23., -.x +. (y+. -.3.));
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,292))    
+
+    def test_expression_4(self):
+        input = """
+Function: main
+    Body:
+        x = True && !False || !(x && y);
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,293))    
+
+    def test_expression_5(self):
+        input = """
+Function: main
+    Body:
+        x = a >= b || a > c && (e <=. f || (e >=. g && a != c && b == d)) && e =/= f;
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,294))    
+
+    def test_expression_6(self):
+        input = """
+Function: main
+    Body:
+        a[3 + foo(2)] = a[b[2][3]] + 4;
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,295))    
+
+    def test_expression_7(self):
+        input = """
+Function: main
+    Body:
+        a[x * y - sum(x,y)] = a[b[sum(x,y) * 2][c[x*y][x \ y] - sqrt(power(x,2))]] * sqrt(power(x+y,x*y) + power(y));
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,296))    
+
+    def test_expression_8(self):
+        input = """
+Function: main
+    Body:
+        x[1*7][2.-.3.] = foo(a[2][b[4]+1] - a[c[2][3]][c[4][5]]);
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,297))    
+
+    def test_expression_9(self):
+        input = """
+Function: main
+    Body:
+        x = a[4][b[5][6]] >. b[c+d][c-d] || !(x&&y || !x&&y); 
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,298))    
+
+    def test_expression_10(self):
+        input = """
+Function: main
+    Body:
+        x = x -. -.(-.y);
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,299))    
 
 
     # Test full program
-    def test_simple_program_1(self):
+    def test_full_program_1(self):
         input = """Var: x;
 Function: fact
     Parameter: n
@@ -932,9 +1021,9 @@ Function: main
         fact (x);
     EndBody."""
         expect = "successful"
-        self.assertTrue(TestParser.checkParser(input,expect,203))
+        self.assertTrue(TestParser.checkParser(input,expect,300))
 
-    def test_simple_program_2(self):
+    def test_full_program_2(self):
         input = """Var: x[5] = {1,2,3,4,5};
 Function: sum
     Parameter: x[5]
@@ -950,9 +1039,9 @@ Function: main
         sum(x);
     EndBody."""
         expect = "successful"
-        self.assertTrue(TestParser.checkParser(input,expect,204))
+        self.assertTrue(TestParser.checkParser(input,expect,301))
 
-    def test_simple_program_3(self):
+    def test_full_program_3(self):
         input = """
 Function: radius
     Parameter: x,       y
@@ -967,9 +1056,9 @@ Function: main
         radius(x,   y);
     EndBody."""
         expect = "successful"
-        self.assertTrue(TestParser.checkParser(input,expect,205))
+        self.assertTrue(TestParser.checkParser(input,expect,302))
 
-    def test_simple_program_4(self):
+    def test_full_program_4(self):
         input = """
 Function: radius
     Parameter: x,       y
@@ -984,9 +1073,9 @@ Function: main
         radius(x,   y);
     EndBody."""
         expect = "successful"
-        self.assertTrue(TestParser.checkParser(input,expect,206))
+        self.assertTrue(TestParser.checkParser(input,expect,303))
 
-    def test_simple_program_5(self):
+    def test_full_program_5(self):
         input = """Var: string_list[4] = {"","","","",""};
 Function: get_string_list
     Parameter: list[4]
@@ -1010,95 +1099,5 @@ Function: main
         print_string_list(string_list);
     EndBody."""
         expect = "successful"
-        self.assertTrue(TestParser.checkParser(input,expect,207))
-
-#     def test_simple_program_2(self):
-#         input = """Var: x[5] = {1,2,3,4,5};
-# Function: sum
-#     Parameter: x[5]
-#         Body:
-#             Var: sum = 0;
-#             For (i = 0 , i < 5, 1) Do
-#                 sum = sum + i;
-#             EndFor.
-#             Return sum;
-#         EndBody.
-# Function: main
-#     Body:
-#         sum(x);
-#     EndBody."""
-#         expect = "successful"
-#         self.assertTrue(TestParser.checkParser(input,expect,204))
-
-#     def test_simple_program_2(self):
-#         input = """Var: x[5] = {1,2,3,4,5};
-# Function: sum
-#     Parameter: x[5]
-#         Body:
-#             Var: sum = 0;
-#             For (i = 0 , i < 5, 1) Do
-#                 sum = sum + i;
-#             EndFor.
-#             Return sum;
-#         EndBody.
-# Function: main
-#     Body:
-#         sum(x);
-#     EndBody."""
-#         expect = "successful"
-#         self.assertTrue(TestParser.checkParser(input,expect,204))
-
-#     def test_simple_program_2(self):
-#         input = """Var: x[5] = {1,2,3,4,5};
-# Function: sum
-#     Parameter: x[5]
-#         Body:
-#             Var: sum = 0;
-#             For (i = 0 , i < 5, 1) Do
-#                 sum = sum + i;
-#             EndFor.
-#             Return sum;
-#         EndBody.
-# Function: main
-#     Body:
-#         sum(x);
-#     EndBody."""
-#         expect = "successful"
-#         self.assertTrue(TestParser.checkParser(input,expect,204))
-
-#     def test_simple_program_2(self):
-#         input = """Var: x[5] = {1,2,3,4,5};
-# Function: sum
-#     Parameter: x[5]
-#         Body:
-#             Var: sum = 0;
-#             For (i = 0 , i < 5, 1) Do
-#                 sum = sum + i;
-#             EndFor.
-#             Return sum;
-#         EndBody.
-# Function: main
-#     Body:
-#         sum(x);
-#     EndBody."""
-#         expect = "successful"
-#         self.assertTrue(TestParser.checkParser(input,expect,204))
-
-#     def test_simple_program_2(self):
-#         input = """Var: x[5] = {1,2,3,4,5};
-# Function: sum
-#     Parameter: x[5]
-#         Body:
-#             Var: sum = 0;
-#             For (i = 0 , i < 5, 1) Do
-#                 sum = sum + i;
-#             EndFor.
-#             Return sum;
-#         EndBody.
-# Function: main
-#     Body:
-#         sum(x);
-#     EndBody."""
-#         expect = "successful"
-#         self.assertTrue(TestParser.checkParser(input,expect,204))
+        self.assertTrue(TestParser.checkParser(input,expect,304))
 
