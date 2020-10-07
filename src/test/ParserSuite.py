@@ -246,6 +246,673 @@ Function: sum
         expect = "Error on line 6 col 20: ="
         self.assertTrue(TestParser.checkParser(input,expect,239))
 
+    # Test valid if statement
+    def test_valid_if_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        If a > 0 Then
+            printStrLn("a is bigger than 0");
+        EndIf.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,240))
+
+    def test_valid_if_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        Var: b = 6;
+        If a > b Then
+            printStrLn("a is bigger than b");
+        Else
+            printStrLn("a is smaller than b");
+        EndIf.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,241))
+
+    def test_valid_if_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        Var: b = 6;
+        If a > b Then
+            printStrLn("a is bigger than b");
+        ElseIf a < b Then
+            printStrLn("a is smaller than b");
+        Else
+            printStrLn("a equals b");
+        EndIf.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,242))
+
+    def test_valid_if_stmt_4(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        Var: b = 6;
+        If a > b Then
+            printStrLn("a is bigger than b");
+        ElseIf a < b Then
+            printStrLn("a is smaller than b");
+        EndIf.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,243))
+
+    def test_valid_if_stmt_5(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        If a % 5 == 0 Then
+            printStrLn("a % 5 == 0");
+        ElseIf a % 5 == 1 Then
+            printStrLn("a % 5 == 1");
+        ElseIf a % 5 == 2 Then
+            printStrLn("a % 5 == 2");
+        ElseIf a % 5 == 3 Then
+            printStrLn("a % 5 == 3");
+        Else
+            printStrLn("a % 5 == 4");
+        EndIf.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,244))
+
+    # Test invalid if statement
+    def test_invalid_if_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        If (a > 0) :
+            printStrLn("a is bigger than 0");
+    EndBody."""
+        expect = "Error on line 5 col 19: :"
+        self.assertTrue(TestParser.checkParser(input,expect,245))
+
+    def test_invalid_if_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        Var: b = 6;
+        If a > b Then
+            printStrLn("a is bigger than b");
+        Else
+            printStrLn("a is smaller than b");
+    EndBody."""
+        expect = "Error on line 10 col 4: EndBody"
+        self.assertTrue(TestParser.checkParser(input,expect,246))
+
+    def test_invalid_if_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        Var: b = 6;
+        If (a > b) Then
+            printStrLn("a is bigger than b");
+        Else If (a < b) Then
+            printStrLn("a is smaller than b");
+        Else
+            printStrLn("a equals b");
+        EndIf.
+    EndBody."""
+        expect = "Error on line 13 col 4: EndBody"
+        self.assertTrue(TestParser.checkParser(input,expect,247))
+
+    def test_invalid_if_stmt_4(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        Var: b = 6;
+        If a > b Then
+            printStrLn("a is bigger than b");
+        ElseIf a < b Then
+            printStrLn("a is smaller than b");
+        EndIf
+    EndBody."""
+        expect = "Error on line 11 col 4: EndBody"
+        self.assertTrue(TestParser.checkParser(input,expect,248))
+
+    def test_invalid_if_stmt_5(self):
+        input = """
+Function: main
+    Body:
+        Var: a = 5;
+        If a % 5 == 0 Then
+            printStrLn("a % 5 == 0");
+        ElseIf a % 5 == 1 Then
+            printStrLn("a % 5 == 1");
+        ElseIf a % 5 == 2 Then
+            printStrLn("a % 5 == 2");
+        ElseIf a % 5 == 3 Then
+            printStrLn("a % 5 == 3");
+        Else
+            printStrLn("a % 5 == 4");
+        Else
+            printStrLn("??????");
+        EndIf.
+    EndBody."""
+        expect = "Error on line 15 col 8: Else"
+        self.assertTrue(TestParser.checkParser(input,expect,249))
+
+    # Test valid for statement
+    def test_valid_for_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, i < 10, 1) Do
+            printStrLn(string_of_int(i));
+        EndFor.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,250))
+
+    def test_valid_for_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, True, (i+5) * 2) Do
+            printStrLn(string_of_int(i));
+        EndFor.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,251))
+
+    def test_valid_for_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, i < 10, 1) Do
+            
+        EndFor.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,252))
+
+    def test_valid_for_stmt_4(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, i < 10, 1) Do
+            Var: j;
+            j = i + 1;
+            printStrLn(string_of_int(i + j));
+        EndFor.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,253))
+
+    def test_valid_for_stmt_5(self):
+        input = """
+Function: main
+    Body:
+        Var: a[3][2] = {{1,2},{3,4},{5,6}};
+        For (i = 0, i < 3, 1) Do
+            For (j = 0, j < 2, 1) Do
+                printStrLn(string_of_int(a[i][j]));
+            EndFor.            
+        EndFor.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,254))
+
+    # Test invalid for statement
+    def test_invalid_for_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, i < 10, 1 Do
+            printStrLn(string_of_int(i));
+        EndFor.
+    EndBody."""
+        expect = "Error on line 4 col 30: Do"
+        self.assertTrue(TestParser.checkParser(input,expect,255))
+
+    def test_invalid_for_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, True; (i+5) * 2) Do
+            printStrLn(string_of_int(i));
+        EndFor.
+    EndBody."""
+        expect = "Error on line 4 col 24: ;"
+        self.assertTrue(TestParser.checkParser(input,expect,256))
+
+    def test_invalid_for_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, i < 10, ) Do
+            i = i + 1;
+        EndFor.
+    EndBody."""
+        expect = "Error on line 4 col 28: )"
+        self.assertTrue(TestParser.checkParser(input,expect,257))
+
+    def test_invalid_for_stmt_4(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, i < 10, 1) :
+            Var: j;
+            j = i + 1;
+            printStrLn(string_of_int(i + j));
+        EndFor.
+    EndBody."""
+        expect = "Error on line 4 col 31: :"
+        self.assertTrue(TestParser.checkParser(input,expect,258))
+
+    def test_invalid_for_stmt_5(self):
+        input = """
+Function: main
+    Body:
+        Var: a[3][2] = {{1,2},{3,4},{5,6}};
+        For (i = 0, i < 3, 1) Do
+            Var: j = 0;
+            For ( , j < 2, 1) Do
+                printStrLn(string_of_int(a[i][j]));
+            EndFor.            
+        EndFor.
+    EndBody."""
+        expect = "Error on line 7 col 18: ,"
+        self.assertTrue(TestParser.checkParser(input,expect,259))
+
+    # Test valid while statement
+    def test_valid_while_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        While (i < 10) Do
+            printStrLn(string_of_int(i));
+            i =  i + 1;
+        EndWhile.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,260))
+
+    def test_valid_while_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        While True Do
+            printStrLn(string_of_int(i));
+            i = (i+5) * 2;
+        EndWhile.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,261))
+
+    def test_valid_while_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        While sqrt(i) < 10 Do
+        EndWhile.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,262))
+
+    def test_valid_while_stmt_4(self):
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        While (i < 10) Do
+            Var: j;
+            j = i + 1;
+            printStrLn(string_of_int(i + j));
+            i = i + 1;
+        EndWhile.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,263))
+
+    def test_valid_while_stmt_5(self):
+        input = """
+Function: main
+    Body:
+        Var: a[3][2] = {{1,2},{3,4},{5,6}}, i = 0;
+        While i < 3 Do
+            Var: j = 0;
+            While j < 2 Do
+                printStrLn(string_of_int(a[i][j]));
+                j =  j + 1;
+            EndWhile.
+            i = i + 1;            
+        EndWhile.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,264))
+
+    # Test invalid while statement
+    def test_invalid_while_stmt_1(self):    # ????
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        While (i < 10) 
+            printStrLn(string_of_int(i));
+            i =  i + 1;
+        EndWhile.
+    EndBody."""
+        expect = "Error on line 5 col 8: While"
+        self.assertTrue(TestParser.checkParser(input,expect,265))
+
+    def test_invalid_while_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        While True Do
+            printStrLn(string_of_int(i));
+            i = (i+5) * 2;
+    EndBody."""
+        expect = "Error on line 8 col 4: EndBody"
+        self.assertTrue(TestParser.checkParser(input,expect,266))
+
+    def test_invalid_while_stmt_3(self):    # ???
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        While i < 10 Do
+        End While.
+    EndBody."""
+        expect = "E"
+        self.assertTrue(TestParser.checkParser(input,expect,267))
+
+    def test_invalid_while_stmt_4(self):    # ???
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        While (i < 10) :
+            Var: j;
+            j = i + 1;
+            printStrLn(string_of_int(i + j));
+            i = i + 1;
+        EndWhile.
+    EndBody."""
+        expect = "Error on line 5 col 8: While"
+        self.assertTrue(TestParser.checkParser(input,expect,268))
+
+    def test_invalid_while_stmt_5(self):    # ???
+        input = """
+Function: main
+    Body:
+        Var: a[3][2] = {{1,2},{3,4},{5,6}}, i = 0;
+        While i < 3 Do
+            Var: j = 0;
+            While  Do
+                printStrLn(string_of_int(a[i][j]));
+                j =  j + 1;
+            EndWhile.
+            i = i + 1;            
+        EndWhile.
+    EndBody."""
+        expect = "Error on line 7 col 12: While"
+        self.assertTrue(TestParser.checkParser(input,expect,269))
+
+    # Test valid do while statement
+    def test_valid_do_while_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        Do
+            printStrLn(string_of_int(i));
+            i =  i + 1;
+        While (i < 10)
+        EndDo.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,270))
+
+    def test_valid_do_while_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        Var: a[3][2] = {{1,2},{3,4},{5,6}}, i = 0;
+        Do
+            Var: j = 0;
+            Do
+                printStrLn(string_of_int(a[i][j]));
+                j =  j + 1;
+            While j < 2
+            EndDo.
+            i = i + 1;   
+        While i < 3         
+        EndDo.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,271))
+
+    # Test invalid do while statement
+    def test_invalid_do_while_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        Var: i = 0;
+        Do
+            printStrLn(string_of_int(i));
+            i =  i + 1;
+        While (i < 10)
+        EndWhile.
+    EndBody."""
+        expect = "Error on line 9 col 8: EndWhile"
+        self.assertTrue(TestParser.checkParser(input,expect,272))
+
+    def test_invalid_do_while_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        Var: a[3][2] = {{1,2},{3,4},{5,6}}, i = 0;
+        Do
+            Var: j = 0;
+            Do
+                printStrLn(string_of_int(a[i][j]));
+                j =  j + 1;
+            While j < 2
+            i = i + 1;   
+        While i < 3         
+        EndDo.
+    EndBody."""
+        expect = "Error on line 11 col 12: i"
+        self.assertTrue(TestParser.checkParser(input,expect,273))
+
+    def test_invalid_do_while_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        Var: a[3][2] = {{1,2},{3,4},{5,6}}, i = 0;
+        Do
+            Var: j = 0;
+            Do :
+                printStrLn(string_of_int(a[i][j]));
+                j =  j + 1;
+            While j < 2
+            EndDo.
+            i = i + 1;   
+        While i < 3         
+        EndDo.
+    EndBody."""
+        expect = "Error on line 7 col 15: :"
+        self.assertTrue(TestParser.checkParser(input,expect,274))
+
+    # Test valid break/continue/return statement
+    def test_valid_break_stmt(self):
+        input = """
+Function: main
+    Body:
+        For (i = 0, i < 10, 1) Do
+            If (i % 10 == 5) Then
+                Break;
+            EndIf.
+            i = i + 1;
+        EndFor.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,275))
+
+    def test_valid_continue_stmt(self):
+        input = """
+Function: main
+    Body:
+        Var: a[3][2] = {{1,2},{3,4},{5,6}}, i = 0;
+        While i < 3 Do
+            Var: j = 0;
+            If i < j Then
+                Continue;
+            EndIf.
+            While (j < 2) Do
+                printStrLn(string_of_int(a[i][j]));
+                j =  j + 1;
+                If j == 3 Then
+                    Continue;
+                EndIf.
+            EndWhile.
+            i = i + 1;           
+        EndWhile.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,276))
+
+    def test_valid_return_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        Return 0;
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,277))
+
+    def test_valid_return_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        Return;
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,278))
+
+    def test_valid_return_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        Return x * (sqrt(y) \ (z + 1)) + sqrt(power(x,2) + power(y,2));
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,279))
+
+    # Test valid call statement
+    def test_valid_call_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        printLn();
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,280))    
+
+    def test_valid_call_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        sqrt(x*x + y * y);
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,281))    
+
+    def test_valid_call_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        sum(a,b,c,d,e,f);
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,282))    
+
+    def test_valid_call_stmt_4(self):
+        input = """
+Function: main
+    Body:
+        a(b(c(d(e(f())))));
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,283))    
+
+    def test_valid_call_stmt_5(self):
+        input = """
+Function: main
+    Body:
+        sqrt(sum(power(x,2) , power(y,2)));
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,284))    
+
+    # Test invalid call statement
+    def test_invalid_call_stmt_1(self):
+        input = """
+Function: main
+    Body:
+        printLn()
+    EndBody."""
+        expect = "Error on line 5 col 4: EndBody"
+        self.assertTrue(TestParser.checkParser(input,expect,285))    
+
+    def test_invalid_call_stmt_2(self):
+        input = """
+Function: main
+    Body:
+        sqrt(x*x + y * y;
+    EndBody."""
+        expect = "Error on line 4 col 24: ;"
+        self.assertTrue(TestParser.checkParser(input,expect,286))    
+
+    def test_invalid_call_stmt_3(self):
+        input = """
+Function: main
+    Body:
+        sum(a,b;c,d,e,f);
+    EndBody."""
+        expect = "Error on line 4 col 15: ;"
+        self.assertTrue(TestParser.checkParser(input,expect,287))    
+
+    def test_invalid_call_stmt_4(self):
+        input = """
+Function: main
+    Body:
+        a(b(c(d(e(f();)))));
+    EndBody."""
+        expect = "Error on line 4 col 21: ;"
+        self.assertTrue(TestParser.checkParser(input,expect,288))    
+
+    def test_invalid_call_stmt_5(self): # ???
+        input = """
+Function: main
+    Body:
+        Sqrt(sum(power(x,2) , power(y,2)));
+    EndBody."""
+        expect = "S"
+        self.assertTrue(TestParser.checkParser(input,expect,289))    
+
+    # Test expression
+
 
     # Test full program
     def test_simple_program_1(self):
