@@ -75,12 +75,12 @@ class ParserSuite(unittest.TestCase):
         expect = "Error on line 1 col 0: :"
         self.assertTrue(TestParser.checkParser(input,expect,220))
 
-    def test_invalid_var_dcl_2(self):   # ???
+    def test_invalid_var_dcl_2(self):   
         input = """b[2][3] = {{2,3,4},{4,5,6}};"""
         expect = "Error on line 1 col 0: b"
         self.assertTrue(TestParser.checkParser(input,expect,221))
 
-    def test_invalid_var_dcl_3(self):   # ???
+    def test_invalid_var_dcl_3(self):
         input = """Var: c, d = 6, e, f,"""
         expect = "Error on line 1 col 20: <EOF>"
         self.assertTrue(TestParser.checkParser(input,expect,222))
@@ -146,7 +146,7 @@ Function: sum
         self.assertTrue(TestParser.checkParser(input,expect,229))
 
     # Test invalid function declaration
-    def test_invalid_func_dcl_1(self):  # ???
+    def test_invalid_func_dcl_1(self):  
         input = """Function: main"""
         expect = "Error on line 1 col 14: <EOF>"
         self.assertTrue(TestParser.checkParser(input,expect,230))
@@ -600,17 +600,17 @@ Function: main
         self.assertTrue(TestParser.checkParser(input,expect,264))
 
     # Test invalid while statement
-    def test_invalid_while_stmt_1(self):    # ????
+    def test_invalid_while_stmt_1(self):
         input = """
 Function: main
     Body:
         Var: i = 0;
-        While (i < 10) 
+        While True 
             printStrLn(string_of_int(i));
             i =  i + 1;
         EndWhile.
     EndBody."""
-        expect = "Error on line 5 col 8: While"
+        expect = "Error on line 6 col 12: printStrLn"
         self.assertTrue(TestParser.checkParser(input,expect,265))
 
     def test_invalid_while_stmt_2(self):
@@ -636,7 +636,7 @@ Function: main
         expect = "E"
         self.assertTrue(TestParser.checkParser(input,expect,267))
 
-    def test_invalid_while_stmt_4(self):    # ???
+    def test_invalid_while_stmt_4(self):
         input = """
 Function: main
     Body:
@@ -648,10 +648,10 @@ Function: main
             i = i + 1;
         EndWhile.
     EndBody."""
-        expect = "Error on line 5 col 8: While"
+        expect = "Error on line 5 col 23: :"
         self.assertTrue(TestParser.checkParser(input,expect,268))
 
-    def test_invalid_while_stmt_5(self):    # ???
+    def test_invalid_while_stmt_5(self):
         input = """
 Function: main
     Body:
@@ -665,7 +665,7 @@ Function: main
             i = i + 1;            
         EndWhile.
     EndBody."""
-        expect = "Error on line 7 col 12: While"
+        expect = "Error on line 7 col 19: Do"
         self.assertTrue(TestParser.checkParser(input,expect,269))
 
     # Test valid do while statement
@@ -1101,3 +1101,83 @@ Function: main
         expect = "successful"
         self.assertTrue(TestParser.checkParser(input,expect,304))
 
+    def test_full_program_6(self):
+        input = """
+** This is a global variable **
+Var: arr[5] = {5,   7, 1,2, 6};
+
+** Sort function **
+Function: sort
+    Parameter: arr[5]
+    Body:
+        For (i = 0, i < 5, 1) Do
+            For (j = i + 1, j < 5, 1) Do
+                If arr[i] < arr[j] Then
+                    Var: temp;
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                EndIf.
+            EndFor.
+        EndFor.
+        Return arr;
+    EndBody.
+
+** Entry of program **
+Function: main
+    Body:
+        For (i = 0, i < 5, 1) Do
+            print(string_of_int(arr[i]));
+            print(" ");
+        EndFor.
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,305))
+
+    def test_full_program_7(self):
+        input = """Var: arr[4] = {"This", "is", "a", "testcase"};
+** This
+* is
+* a
+* block
+* comment ** 
+Function: printSth
+    Parameter: arr[4]
+    Body:
+        Var : count = 0;
+        While count < 100 Do
+            If (count % 3 == 0) || (count % 5 == 0) Then
+                printLn("Skip");
+                Continue;
+            ElseIf (count % 4 == 0) Then
+                Break;
+            EndIf.
+            For (i = 0 , i < 4, 1) Do
+                print(string_to_int(arr[i]));
+                print(" ");
+            EndFor.
+            count = count + -1 + 1;
+        EndWhile.
+    EndBody.
+
+Function: main
+    Body:
+        printSth(arr);
+    EndBody."""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,306))
+
+    def test_full_program_8(self):
+        input = """"""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,307))
+
+    def test_full_program_9(self):
+        input = """"""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,308))
+
+    def test_full_program_10(self):
+        input = """"""
+        expect = "successful"
+        self.assertTrue(TestParser.checkParser(input,expect,309))

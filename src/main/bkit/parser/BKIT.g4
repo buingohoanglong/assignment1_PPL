@@ -41,24 +41,24 @@ func_dcl : FUNCTION COLON ID param_list? body ;
 
 param_list : PARAMETER COLON param (COMMA param)*; 
 
-param : ID (LSB INTLIT RSB)*;
+param : ID (LSB INTLIT RSB)*;   // (LSB INTLIT RSB)* ???
 
-body : BODY COLON statement_list END_BODY DOT;
-
-statement_list : var_dcl* (assign_stmt | if_stmt | for_stmt | while_stmt | do_while_stmt | call_stmt | return_stmt | break_stmt | continue_stmt)*;
+body : BODY COLON var_dcl* statement* END_BODY DOT; // why separate statement_list into var_dcl* statement*
 
 // statements
+statement : assign_stmt | if_stmt | for_stmt | while_stmt | do_while_stmt | call_stmt | return_stmt | break_stmt | continue_stmt;
+
 assign_stmt : variable ASSIGN_OP expression SEMI;
 
 variable : ID (LSB expression RSB)*;
 
-if_stmt : IF expression THEN statement_list (ELSE_IF expression THEN statement_list)* (ELSE statement_list)? END_IF DOT;
+if_stmt : IF expression THEN var_dcl* statement* (ELSE_IF expression THEN var_dcl* statement*)* (ELSE var_dcl* statement*)? END_IF DOT;
 
-for_stmt : FOR LP ID ASSIGN_OP expression COMMA expression COMMA expression RP DO statement_list END_FOR DOT;
+for_stmt : FOR LP ID ASSIGN_OP expression COMMA expression COMMA expression RP DO var_dcl* statement* END_FOR DOT;
 
-while_stmt : WHILE expression DO statement_list END_WHILE DOT;
+while_stmt : WHILE expression DO var_dcl* statement* END_WHILE DOT;
 
-do_while_stmt : DO statement_list WHILE expression END_DO DOT;
+do_while_stmt : DO var_dcl* statement* WHILE expression END_DO DOT;
 
 break_stmt : BREAK SEMI;
 
@@ -106,10 +106,10 @@ STRINGLIT : '"' STR_CHAR* '"'
         value = str(self.text);
         self.text = value[1:-1]
     }; 
-fragment STR_CHAR : ~['"\n\\] | ('\\' ['bfrnt\\]) | ('\'' '"');
+fragment STR_CHAR : ('\\' ['bfrnt\\]) | ('\'' '"') | ~['"\n\\];
 
 // Array
-ARRAYLIT : LCB WS* (LITERAL WS* (COMMA WS* LITERAL WS*)*)? RCB;
+ARRAYLIT : LCB WS* (LITERAL WS* (COMMA WS* LITERAL WS*)*)? RCB; // remove white space when return token ???
 fragment LITERAL : INTLIT | FLOATLIT | BOOLEANLIT | STRINGLIT | ARRAYLIT;
 
 // Keywords
@@ -187,7 +187,7 @@ UNCLOSE_STRING: '"' STR_CHAR*
         value = str(self.text)
         self.text = value[1:]
     };
-ILLEGAL_ESCAPE: '"' STR_CHAR* '\\' ~['bfrnt\\]
+ILLEGAL_ESCAPE: '"' STR_CHAR* ('\\' ~['bfrnt\\] | '\'') // \n is illegal escape or unclose string
     {
         value = str(self.text)
         self.text = value[1:]
