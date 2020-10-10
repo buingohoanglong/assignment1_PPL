@@ -954,7 +954,7 @@ Function: main
     Body:
         x = a >= b || a > c && (e <=. f || (e >=. g && a != c && b == d)) && e =/= f;
     EndBody."""
-        expect = "successful"
+        expect = "Error on line 4 col 24: >"
         self.assertTrue(TestParser.checkParser(input,expect,294))    
 
     def test_expression_6(self):

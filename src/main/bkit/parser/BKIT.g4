@@ -71,18 +71,42 @@ func_call : ID LP (expression (COMMA expression)*)? RP;
 return_stmt : RETURN expression? SEMI;
 
 // expression
-expression : 
-    LP expression RP
-    | func_call // function call : assoc none ?????
-    | ID (LSB expression RSB)+ // index : ARRAYLIT[expression] ??????
-    | <assoc=right> (INT_SUB_OP | FLOAT_SUB_OP) expression  // sign
-    | <assoc=right> NEG_OP expression   // logical
-    | expression (INT_MUL_OP | FLOAT_MUL_OP | INT_DIV_OP | FLOAT_DIV_OP | INT_REMAINDER_OP) expression // multiplying
-    | expression (INT_ADD_OP | FLOAT_ADD_OP | INT_SUB_OP | FLOAT_SUB_OP) expression // adding
-    | expression (CONJ_OP | DISJ_OP) expression // logical
-    | expression (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) expression // relational : assoc none ????
-    | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | ARRAYLIT) ; // operands
+// expression : 
+//     LP expression RP
+//     | func_call // function call : assoc none ?????
+//     | ID (LSB expression RSB)+ // index : ARRAYLIT[expression] ??????
+//     | <assoc=right> (INT_SUB_OP | FLOAT_SUB_OP) expression  // sign
+//     | <assoc=right> NEG_OP expression   // logical
+//     | expression (INT_MUL_OP | FLOAT_MUL_OP | INT_DIV_OP | FLOAT_DIV_OP | INT_REMAINDER_OP) expression // multiplying
+//     | expression (INT_ADD_OP | FLOAT_ADD_OP | INT_SUB_OP | FLOAT_SUB_OP) expression // adding
+//     | expression (CONJ_OP | DISJ_OP) expression // logical
+//     | expression (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) expression // relational : assoc none ????
+//     | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | ARRAYLIT) ; // operands
 
+expression :
+    exp1 (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) exp1   // relational
+    | exp1;
+
+exp1 : exp1 (CONJ_OP | DISJ_OP) exp2 // logical
+    | exp2;
+
+exp2 : exp2 (INT_ADD_OP | FLOAT_ADD_OP | INT_SUB_OP | FLOAT_SUB_OP) exp3 // adding
+    | exp3;
+
+exp3 : exp3 (INT_MUL_OP | FLOAT_MUL_OP | INT_DIV_OP | FLOAT_DIV_OP | INT_REMAINDER_OP) exp4 // multiplying
+    | exp4;
+
+exp4 : NEG_OP exp4   // logical
+    | exp5;
+
+exp5 : (INT_SUB_OP | FLOAT_SUB_OP) exp5  // sign
+    | exp6;
+
+exp6 : LP expression RP
+    | func_call // function call : assoc none ?????
+    | ID (LSB expression RSB)+ 
+    | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | ARRAYLIT) ; // operands
+    
 // Identifiers
 ID: [a-z][a-zA-Z0-9_]* ;
 
