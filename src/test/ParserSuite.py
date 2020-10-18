@@ -1168,16 +1168,41 @@ Function: main
         self.assertTrue(TestParser.checkParser(input,expect,306))
 
     def test_full_program_8(self):
-        input = """"""
-        expect = "successful"
+        input = """Var: a[5][6][3]={12,2,5,{65,9,5}};
+Function: thisIsAFunction
+    Parameter: kdhgf82734jsdh,h44qa43t,r,qrra,az
+    Body:
+            jgf348dh(**lsokf**sfle,zugse, 0, 8+9+7);
+            Continue;
+    EndBody.
+
+Function: dcmasci
+    Parameter: t4t2, a4, m_34dwq, {}
+    Body:
+        Var: tngh[7645+ts87443]={};
+        Break;
+    EndBody."""
+        expect = "Error on line 10 col 34: {"
         self.assertTrue(TestParser.checkParser(input,expect,307))
 
     def test_full_program_9(self):
-        input = """"""
-        expect = "successful"
+        input = """Var: a = {2,3};
+Function: x
+    Parameter: a
+    Body:
+
+    EndBody.
+foo();"""
+        expect = "Error on line 7 col 0: foo"
         self.assertTrue(TestParser.checkParser(input,expect,308))
 
     def test_full_program_10(self):
-        input = """"""
-        expect = "successful"
+        input = """           
+Function: foo
+    Parameter: a , v , asd[5][12][4]
+    Body:
+        Var: a_b_c = 1;
+        a_b_c = p[1][2 + !!c[asd] + zxc[123];
+    EndBody."""
+        expect = "Error on line 6 col 44: ;"
         self.assertTrue(TestParser.checkParser(input,expect,309))

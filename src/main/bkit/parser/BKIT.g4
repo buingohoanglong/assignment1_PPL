@@ -33,7 +33,7 @@ program  : var_dcl* func_dcl* EOF;
 // variable declaration
 var_dcl : VAR COLON var_init (COMMA var_init)* SEMI;
 
-var_init : var (ASSIGN_OP (INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | ARRAYLIT))?; 
+var_init : var (ASSIGN_OP (INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | arraylit))?; 
 
 var : ID (LSB INTLIT RSB)*;
 // function declaration
@@ -74,14 +74,14 @@ return_stmt : RETURN expression? SEMI;
 // expression : 
 //     LP expression RP
 //     | func_call // function call : assoc none ?????
-//     | ID (LSB expression RSB)+ // index : ARRAYLIT[expression] ??????
+//     | ID (LSB expression RSB)+ // index : arraylit[expression] ??????
 //     | <assoc=right> (INT_SUB_OP | FLOAT_SUB_OP) expression  // sign
 //     | <assoc=right> NEG_OP expression   // logical
 //     | expression (INT_MUL_OP | FLOAT_MUL_OP | INT_DIV_OP | FLOAT_DIV_OP | INT_REMAINDER_OP) expression // multiplying
 //     | expression (INT_ADD_OP | FLOAT_ADD_OP | INT_SUB_OP | FLOAT_SUB_OP) expression // adding
 //     | expression (CONJ_OP | DISJ_OP) expression // logical
 //     | expression (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) expression // relational : assoc none ????
-//     | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | ARRAYLIT) ; // operands
+//     | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | arraylit) ; // operands
 
 expression :
     exp1 (EQ_OP | INT_NEQ_OP | FLOAT_NEQ_OP | INT_LT_OP | FLOAT_LT_OP | INT_GT_OP | FLOAT_GT_OP | INT_LTE_OP | FLOAT_LTE_OP | INT_GTE_OP | FLOAT_GTE_OP) exp1   // relational
@@ -105,7 +105,7 @@ exp5 : (INT_SUB_OP | FLOAT_SUB_OP) exp5  // sign
 exp6 : LP expression RP
     | func_call // function call : assoc none ?????
     | ID (LSB expression RSB)+ 
-    | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | ARRAYLIT) ; // operands
+    | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | arraylit) ; // operands
     
 // Identifiers
 ID: [a-z][a-zA-Z0-9_]* ;
@@ -133,8 +133,9 @@ STRINGLIT : '"' STR_CHAR* '"'
 fragment STR_CHAR : ('\\' ['bfrnt\\]) | ('\'' '"') | ~['"\n\\];
 
 // Array
-ARRAYLIT : LCB WS* (LITERAL WS* (COMMA WS* LITERAL WS*)*)? RCB; // remove white space when return token ???
-fragment LITERAL : INTLIT | FLOATLIT | BOOLEANLIT | STRINGLIT | ARRAYLIT;
+// arraylit : LCB WS* (LITERAL WS* (COMMA WS* LITERAL WS*)*)? RCB;  // remove white space when return token ???
+arraylit : LCB ((INTLIT | FLOATLIT | BOOLEANLIT | STRINGLIT | arraylit) (COMMA (INTLIT | FLOATLIT | BOOLEANLIT | STRINGLIT | arraylit) )*)? RCB;  // remove white space when return token ???
+// fragment LITERAL : INTLIT | FLOATLIT | BOOLEANLIT | STRINGLIT | arraylit;
 
 // Keywords
 BODY : 'Body';
@@ -211,7 +212,7 @@ UNCLOSE_STRING: '"' STR_CHAR*
         value = str(self.text)
         self.text = value[1:]
     };
-ILLEGAL_ESCAPE: '"' STR_CHAR* ('\\' ~['bfrnt\\] | '\'') // \n is illegal escape or unclose string
+ILLEGAL_ESCAPE: '"' STR_CHAR* ('\\' ~['bfrnt\\] | '\'' .) // \n is illegal escape or unclose string. Note the last dot 
     {
         value = str(self.text)
         self.text = value[1:]

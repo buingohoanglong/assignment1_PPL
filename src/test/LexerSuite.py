@@ -272,10 +272,10 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.checkLexeme(""" "abc"def"xyz" """, """abc,def,xyz,<EOF>""",87))   
 
     def test_invalid_string_literal_3(self):
-        self.assertTrue(TestLexer.checkLexeme(""" "abc'xyz" """, """Illegal Escape In String: abc'""",88)) 
+        self.assertTrue(TestLexer.checkLexeme(""" "abc'xyz" """, """Illegal Escape In String: abc'x""",88)) 
 
     def test_invalid_string_literal_4(self):
-        self.assertTrue(TestLexer.checkLexeme(""" "abc\'xyz" """, """Illegal Escape In String: abc'""",89))
+        self.assertTrue(TestLexer.checkLexeme(""" "abc\'xyz" """, """Illegal Escape In String: abc'x""",89))
 
     def test_invalid_string_literal_5(self):
         self.assertTrue(TestLexer.checkLexeme(""" "abcxyz """, """Unclosed String: abcxyz """,90))   
@@ -297,20 +297,20 @@ class LexerSuite(unittest.TestCase):
 
     # Test normal array
     def test_normal_array_literal_1(self):
-        self.assertTrue(TestLexer.checkLexeme("{1, 2, 3, 4, 5}", "{1, 2, 3, 4, 5},<EOF>",96)) 
+        self.assertTrue(TestLexer.checkLexeme("{1, 2, 3, 4, 5}", "{,1,,,2,,,3,,,4,,,5,},<EOF>",96)) 
 
     def test_normal_array_literal_2(self):
-        self.assertTrue(TestLexer.checkLexeme("{{1, 2}, {4, 5}, {3, 5}}", "{{1, 2}, {4, 5}, {3, 5}},<EOF>",97))
+        self.assertTrue(TestLexer.checkLexeme("{{1, 2}, {4, 5}, {3, 5}}", "{,{,1,,,2,},,,{,4,,,5,},,,{,3,,,5,},},<EOF>",97))
 
     def test_normal_array_literal_3(self):
-        self.assertTrue(TestLexer.checkLexeme("{}", "{},<EOF>",98)) 
+        self.assertTrue(TestLexer.checkLexeme("{}", "{,},<EOF>",98)) 
 
     # Test invalid array
     def test_invalid_array_literal_1(self):
         self.assertTrue(TestLexer.checkLexeme("{1,2,3,4,5", "{,1,,,2,,,3,,,4,,,5,<EOF>",99))
 
     def test_invalid_array_literal_2(self):
-        self.assertTrue(TestLexer.checkLexeme("{{1, 2}, {4, 5, {3, 5}}}", "{{1, 2}, {4, 5, {3, 5}}},<EOF>",100))    
+        self.assertTrue(TestLexer.checkLexeme("{{1, 2}, {4, 5, {3, 5}}}", "{,{,1,,,2,},,,{,4,,,5,,,{,3,,,5,},},},<EOF>",100))    
 
 
 

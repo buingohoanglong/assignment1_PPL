@@ -1,0 +1,14 @@
+Var: a[5][6][3]={12,2,5,{65,9,5}};
+Function: thisIsAFunction
+    Parameter: kdhgf82734jsdh,h44qa43t,r,qrra,az
+    Body:
+            jgf348dh(**lsokf**sfle,zugse, 0, 8+9+7);
+            Continue;
+    EndBody.
+
+Function: dcmasci
+    Parameter: t4t2, a4, m_34dwq, {}
+    Body:
+        Var: tngh[7645+ts87443]={};
+        Break;
+    EndBody.

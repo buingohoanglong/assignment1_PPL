@@ -144,5 +144,10 @@ class BKITVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BKITParser#arraylit.
+    def visitArraylit(self, ctx:BKITParser.ArraylitContext):
+        return self.visitChildren(ctx)
+
+
 
 del BKITParser
