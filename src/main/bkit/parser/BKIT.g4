@@ -104,7 +104,7 @@ exp5 : (INT_SUB_OP | FLOAT_SUB_OP) exp5  // sign
 
 exp6 : LP expression RP
     | func_call // function call : assoc none ?????
-    | ID (LSB expression RSB)+ 
+    | (ID | func_call) (LSB expression RSB)+ // ID or func_call | exp higher precedence  ???
     | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | arraylit) ; // operands
     
 // Identifiers

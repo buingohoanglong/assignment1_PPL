@@ -1199,10 +1199,10 @@ foo();"""
     def test_full_program_10(self):
         input = """           
 Function: foo
-    Parameter: a , v , asd[5][12][4]
+    Parameter: a , v , asd[6][21]
     Body:
-        Var: a_b_c = 1;
-        a_b_c = p[1][2 + !!c[asd] + zxc[123];
+        Var: a_b_c = 7;
+        a_b_c[x + y + foo(z)] = foo(z)[foo(z)] + foo(z);
     EndBody."""
-        expect = "Error on line 6 col 44: ;"
+        expect = "successful"
         self.assertTrue(TestParser.checkParser(input,expect,309))
