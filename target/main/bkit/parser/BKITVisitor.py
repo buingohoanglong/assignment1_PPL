@@ -59,8 +59,8 @@ class BKITVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BKITParser#variable.
-    def visitVariable(self, ctx:BKITParser.VariableContext):
+    # Visit a parse tree produced by BKITParser#lhs.
+    def visitLhs(self, ctx:BKITParser.LhsContext):
         return self.visitChildren(ctx)
 
 
@@ -141,6 +141,11 @@ class BKITVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by BKITParser#exp6.
     def visitExp6(self, ctx:BKITParser.Exp6Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by BKITParser#exp7.
+    def visitExp7(self, ctx:BKITParser.Exp7Context):
         return self.visitChildren(ctx)
 
 

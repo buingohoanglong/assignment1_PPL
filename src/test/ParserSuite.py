@@ -1172,8 +1172,14 @@ Function: main
 Function: thisIsAFunction
     Parameter: kdhgf82734jsdh,h44qa43t,r,qrra,az
     Body:
-            jgf348dh(**lsokf**sfle,zugse, 0, 8+9+7);
-            Continue;
+            If (x + foo(5)[6]) Then
+                jgf348dh(**lsokf**sfle,zugse, 0, 8+9+7);
+                Continue;
+            ElseIf True == False Then
+                (x + y)
+            Else
+                return {1,2,3}[1];
+            EndIf.
     EndBody.
 
 Function: dcmasci
@@ -1182,7 +1188,7 @@ Function: dcmasci
         Var: tngh[7645+ts87443]={};
         Break;
     EndBody."""
-        expect = "Error on line 10 col 34: {"
+        expect = "Error on line 10 col 12: Else"
         self.assertTrue(TestParser.checkParser(input,expect,307))
 
     def test_full_program_9(self):
@@ -1190,10 +1196,10 @@ Function: dcmasci
 Function: x
     Parameter: a
     Body:
-
+        foo()[x + y] = {1,2,3,4}[2] + foo(z);
     EndBody.
-foo();"""
-        expect = "Error on line 7 col 0: foo"
+"""
+        expect = "successful"
         self.assertTrue(TestParser.checkParser(input,expect,308))
 
     def test_full_program_10(self):
@@ -1202,7 +1208,7 @@ Function: foo
     Parameter: a , v , asd[6][21]
     Body:
         Var: a_b_c = 7;
-        a_b_c[x + y + foo(z)] = foo(z)[foo(z)] + foo(z);
+        a_b_c[x + y + foo(z)[0]] = (foo(z))[foo(z)] + foo(z);
     EndBody."""
         expect = "successful"
         self.assertTrue(TestParser.checkParser(input,expect,309))

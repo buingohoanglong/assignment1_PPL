@@ -48,9 +48,9 @@ body : BODY COLON var_dcl* statement* END_BODY DOT; // why separate statement_li
 // statements
 statement : assign_stmt | if_stmt | for_stmt | while_stmt | do_while_stmt | call_stmt | return_stmt | break_stmt | continue_stmt;
 
-assign_stmt : variable ASSIGN_OP expression SEMI;
+assign_stmt : lhs ASSIGN_OP expression SEMI;
 
-variable : ID (LSB expression RSB)*;
+lhs : ID | exp7 (LSB expression RSB)+;  // lhs is scala variable or index expression
 
 if_stmt : IF expression THEN var_dcl* statement* (ELSE_IF expression THEN var_dcl* statement*)* (ELSE var_dcl* statement*)? END_IF DOT;
 
@@ -102,10 +102,17 @@ exp4 : NEG_OP exp4   // logical
 exp5 : (INT_SUB_OP | FLOAT_SUB_OP) exp5  // sign
     | exp6;
 
-exp6 : LP expression RP
+exp6 : exp7 (LSB expression RSB)+   // index expression: (ID | func_call) or exp7 ???
+    | exp7;
+
+exp7 : LP expression RP
     | func_call // function call : assoc none ?????
-    | (ID | func_call) (LSB expression RSB)+ // ID or func_call | exp higher precedence  ???
     | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | arraylit) ; // operands
+
+// exp6 : LP expression RP
+//     | func_call // function call : assoc none ?????
+//     | (ID | func_call) (LSB expression RSB)+ // ID or func_call | exp higher precedence  ???
+//     | (ID | INTLIT | FLOATLIT | STRINGLIT | BOOLEANLIT | arraylit) ; // operands
     
 // Identifiers
 ID: [a-z][a-zA-Z0-9_]* ;
